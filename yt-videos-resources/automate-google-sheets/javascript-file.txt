@@ -1,0 +1,33 @@
+
+function transformData() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sourceSheet = ss.getSheetByName('Form Responses 1'); // Replace  with the name of your source sheet
+  var targetSheet = ss.getSheetByName('Transformed Data - 2'); // Replace  with the name of your target sheet
+  var sourceData = sourceSheet.getDataRange().getValues();
+  
+  var headers = sourceData[0];
+  var outputData = [["Index", "Date_Submitted", "Date_Attended", "Questions", "Responses"]]; // Add headers to the output data
+  
+  var index = 1; // Initialize index counter
+  
+  // Loop through each row starting from the second row (index 1)
+  for (var i = 1; i < sourceData.length; i++) {
+    var row = sourceData[i];
+    var dateSubmitted = row[0]; // Assuming date submitted is in the first column
+    var dateAttended = row[1]; // Assuming date attended is in the second column
+    
+    // Loop through each question/response pair
+    for (var j = 2; j < headers.length; j++) {
+      var question = headers[j];
+      var response = row[j];
+      
+      // Push transformed data to output array
+      outputData.push([String(index++), dateSubmitted, dateAttended, question, response]); // Convert index to string
+    }
+  }
+  
+  // Clear existing data in target sheet and set new values
+  targetSheet.clear();
+  targetSheet.getRange(1, 1, outputData.length, outputData[0].length).setValues(outputData);
+}
+
