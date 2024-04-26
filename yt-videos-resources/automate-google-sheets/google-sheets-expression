@@ -1,0 +1,1 @@
+= Query(ARRAYFORMULA(SPLIT(FLATTEN(ARRAYFORMULA(IF(('Form Responses 1'!A2:A12<>"")+('Form Responses 1'!B2:B12<>""), TEXT('Form Responses 1'!A2:A12, "yyyy-mm-dd") & "|" & TEXT('Form Responses 1'!B2:B12, "yyyy-mm-dd"), ""))&"|"&'Form Responses 1'!C1:F1&"|"&'Form Responses 1'!C2:F13), "|")),"Select * where Col1 is not null and Col4 is not null")
